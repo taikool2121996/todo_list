@@ -1,17 +1,21 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import styles from "./styles.js";
-import {withStyles} from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import configureStore from '../../redux/configureStore';
 import Taskboard from '../Taskboard/index.js';
+import styles from "./styles.js";
 
+const store = configureStore();
 class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <ThemeProvider>
-        <Taskboard />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider>
+          <Taskboard />
+        </ThemeProvider>
+      </Provider>
     );
   }
 }
