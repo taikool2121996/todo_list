@@ -7,6 +7,7 @@ import Taskboard from '../Taskboard/index.js';
 import styles from "./styles.js";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import GlobalLoading from '../../components/GlobalLoading';
 
 const store = configureStore();
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
       <Provider store={store}>
         <ThemeProvider>
           <ToastContainer />
+          <GlobalLoading />
           <Taskboard />
         </ThemeProvider>
       </Provider>
