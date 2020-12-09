@@ -15,13 +15,13 @@ class TaskBoard extends Component {
   state = {
     open: false,
   };
-
+/*
   componentDidMount() {
     const { taskActionCreators } = this.props;
-    const { fetchListTaskRequest } = taskActionCreators;
-    fetchListTaskRequest();
+    const { fetchListTask } = taskActionCreators;
+    fetchListTask();
   }
-
+*/
   handleClose = () => {
     this.setState({
       open: false,
@@ -58,11 +58,34 @@ class TaskBoard extends Component {
     return xhtml;
   }
 
+  loadData = () => {
+    const { taskActionCreators } = this.props;
+    const { fetchListTask } = taskActionCreators;
+    fetchListTask();
+  }
+
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.taskBoard}>
-        <Button variant="contained" color="primary" className={classes.button} onClick={this.openForm}>
+      <div className={classes.taskBoard} id="1">
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.loadData}
+          style={{
+            marginRight: 20,
+          }}
+        >
+           LOAD DATA
+        </Button>
+
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.openForm}
+        >
           <AddIcon /> ADD NEW TASKS
         </Button>
         {this.renderBoard()}
@@ -75,7 +98,7 @@ class TaskBoard extends Component {
 TaskBoard.propTypes = {
   classes: PropTypes.object,
   taskActionCreators: PropTypes.shape({
-    fetchListTaskRequest: PropTypes.func,
+    fetchListTask: PropTypes.func,
   }),
   listTask: PropTypes.array,
 };

@@ -24,11 +24,13 @@ export const fetchListTaskFailed = error => {
     },
   };
 };
+
 /**
  * Step 1: fetchListTaskRequest()
  * Step 2: Reset: state tasks => []
  * Step 3: fetchListTaskSuccess( data response)
  */
+/*
 export const fetchListTaskRequest = () => {
   return dispatch => {
     dispatch(fetchListTask());
@@ -43,3 +45,4 @@ export const fetchListTaskRequest = () => {
       });
   };
 };
+*/
