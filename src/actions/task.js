@@ -25,6 +25,20 @@ export const fetchListTaskFailed = error => {
   };
 };
 
+export const filterTask = keyword => ({
+  type: taskConstants.FILTER_TASK,
+  payload: {
+    keyword,
+  },
+});
+
+export const filterTaskSuccess = data => ({
+  type: taskConstants.FILTER_TASK_SUCCESS,
+  payload: {
+    data,
+  },
+});
+
 /**
  * Step 1: fetchListTaskRequest()
  * Step 2: Reset: state tasks => []
