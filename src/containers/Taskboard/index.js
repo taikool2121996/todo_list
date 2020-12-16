@@ -11,6 +11,7 @@ import TaskList from './../../components/TaskList';
 import SearchBox from './../../components/SearchBox';
 import { STATUSES } from '../../constants';
 import * as taskActions from './../../actions/task';
+import * as modalActions from './../../actions/modal';
 import styles from './styles';
 class TaskBoard extends Component {
   state = {
@@ -30,9 +31,10 @@ class TaskBoard extends Component {
   };
 
   openForm = () => {
-    this.setState({
-      open: true,
-    });
+    const { modalActions } = this.props;
+    const { showModal, changeModalTitle, changeModalContent } = modalActions;
+    showModal();
+    changeModalTitle('Add new work');
   };
 
   renderBoard() {
@@ -116,6 +118,12 @@ TaskBoard.propTypes = {
     fetchListTask: PropTypes.func,
     filterTask: PropTypes.func,
   }),
+  modalActions: PropTypes.shape({
+    showModal: PropTypes.func,
+    hideModal: PropTypes.func,
+    changeModalTitle: PropTypes.func,
+    changeModalContent: PropTypes.func,
+  }),
   listTask: PropTypes.array,
 };
 
@@ -127,6 +135,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     taskActionCreators: bindActionCreators(taskActions, dispatch),
+    modalActions: bindActionCreators(modalActions, dispatch),
   };
 };
 
