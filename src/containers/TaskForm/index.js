@@ -11,17 +11,18 @@ import { compose, bindActionCreators } from 'redux';
 import * as modalActions from './../../actions/modal';
 import { reduxForm, Field } from 'redux-form';
 import renderTextField from '../../components/FormHelper/TextField';
-
+import validate from './validate';
 class TaskForm extends Component {
 
   handleSubmitForm = data => {
     console.log('data: ', data );
   }
 
-  //Validation
+  /*
+  //Validation using Field-Level-Validation in ReduxForm
 
   //Validate the field is filled or not
-  /* Cách 1
+  //Cách 1
   required = value => {
     let error = 'This is required';
     if (value !== null && typeof value !== 'undefined' && value.trim() !== '') {
@@ -29,8 +30,8 @@ class TaskForm extends Component {
     }
     return error;
   }
-  */
-  required = value => (value || typeof value === 'number' ? undefined : 'Required') //Cách 2: Toán tử 3 ngôi
+  //Cách 2: Toán tử 3 ngôi
+  required = value => (value || typeof value === 'number' ? undefined : 'Required')
 
   //Validate the min length of the filed
   minLength = value => {
@@ -40,8 +41,9 @@ class TaskForm extends Component {
     }
     return error;
   }
-  //End of validation
 
+  //End of validation
+  */
   render() {
     console.log('prop', this.props);
     const { classes, modalActionCreators, handleSubmitForm } = this.props;
@@ -57,7 +59,7 @@ class TaskForm extends Component {
               margin="normal"
               name="title"
               component={renderTextField}
-              validate={[this.required, this.minLength5]}
+              // validate={[this.required, this.minLength5]}
             />
           </Grid>
           <Grid item md={12}>
@@ -122,6 +124,7 @@ const FORM_NAME = 'TASK_MANAGEMENT';
 
 const withReduxForm = reduxForm({
   form: FORM_NAME,
+  validate,
 })
 export default compose(
   withStyles(styles),
