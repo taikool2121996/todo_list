@@ -45,8 +45,8 @@ class TaskForm extends Component {
   //End of validation
   */
   render() {
-    console.log('prop', this.props);
-    const { classes, modalActionCreators, handleSubmitForm } = this.props;
+    // console.log('prop', this.props);
+    const { classes, modalActionCreators, handleSubmitForm, invalid, submitting } = this.props;
     const { hideModal } = modalActionCreators;
     return (
       <form onSubmit={this.handleSubmitForm}>
@@ -87,11 +87,11 @@ class TaskForm extends Component {
               <Box ml={1}>
                 <Button variant="contained" onClick={hideModal}>
                   Cancel
-                    </Button>
+                </Button>
               </Box>
-              <Button variant="contained" color="primary" type="submit">
+              <Button disabled={invalid || submitting} variant="contained" color="primary" type="submit">
                 Save
-                  </Button>
+              </Button>
             </Box>
           </Grid>
         </Grid>
@@ -106,6 +106,8 @@ TaskForm.propTypes = {
     hideModal: PropTypes.func,
   }),
   handleSubmit: PropTypes.func,
+  invalid: PropTypes.bool,
+  submitting: PropTypes.bool,
 };
 
 const mapStateToProps = null;
