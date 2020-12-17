@@ -17,6 +17,31 @@ class TaskForm extends Component {
   handleSubmitForm = data => {
     console.log('data: ', data );
   }
+
+  //Validation
+
+  //Validate the field is filled or not
+  /* Cách 1
+  required = value => {
+    let error = 'This is required';
+    if (value !== null && typeof value !== 'undefined' && value.trim() !== '') {
+      error = null;
+    }
+    return error;
+  }
+  */
+  required = value => (value || typeof value === 'number' ? undefined : 'Required') //Cách 2: Toán tử 3 ngôi
+
+  //Validate the min length of the filed
+  minLength = value => {
+    let error = null;
+    if ( value.length < 5){
+      error = ' Title must be at least 5 characters';
+    }
+    return error;
+  }
+  //End of validation
+
   render() {
     console.log('prop', this.props);
     const { classes, modalActionCreators, handleSubmitForm } = this.props;
@@ -32,6 +57,7 @@ class TaskForm extends Component {
               margin="normal"
               name="title"
               component={renderTextField}
+              validate={[this.required, this.minLength5]}
             />
           </Grid>
           <Grid item md={12}>
