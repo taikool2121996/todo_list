@@ -1,4 +1,3 @@
-
 const styles = theme => ({
   modal: {
     top: '50%',
@@ -10,9 +9,6 @@ const styles = theme => ({
     boxShadow: [5],
     padding:(2,4,4),
     outline: 'none',
-  },
-  textField: {
-    width: '100%',
   },
   header: {
     backgroundColor: 'aqua',

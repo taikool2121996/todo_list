@@ -17,17 +17,12 @@ import * as taskTypes from './../constants/task';
 function* watchFetchListTaskAction() {
   while (true) {
     yield take(taskTypes.FETCH_TASK);
-    //======== BLOCK cho đến khi take xong =========//
     yield put(showLoading());
-    console.log('watch fetch list task action');
     const resp = yield call(getList);
-    //======== BLOCK cho đến khi call xong =========//
     const { status, data } = resp;
     if (status === STATUS_CODE.SUCCESS) {
-      // dispatch action fetchListTaskSuccess
       yield put(fetchListTaskSuccess(data));
     } else {
-      // dispatch action fetchListTaskFail
       yield put(fetchListTaskFailed(data));
     }
     yield delay(1000);
@@ -35,13 +30,7 @@ function* watchFetchListTaskAction() {
   }
 }
 
-/*
-function* watchCreateTaskAction() {
-  console.log('watch create list task action')
-}
-*/
-
-function* filterTaskSaga(payload) {
+function* filterTaskSaga( {payload} ) {
   yield delay(500);
   const { keyword } = payload;
   const list = yield select(state =>state.task.listTask);

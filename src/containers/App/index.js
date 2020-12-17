@@ -8,6 +8,7 @@ import styles from "./styles.js";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GlobalLoading from '../../components/GlobalLoading';
+import Modal from '../../components/Modal';
 
 const store = configureStore();
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
         <ThemeProvider>
           <ToastContainer />
           <GlobalLoading />
+          <Modal />
           <Taskboard />
         </ThemeProvider>
       </Provider>

@@ -6,24 +6,24 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import TaskForm from './../../components/TaskForm';
+import TaskForm from '../TaskForm';
 import TaskList from './../../components/TaskList';
 import SearchBox from './../../components/SearchBox';
 import { STATUSES } from '../../constants';
 import * as taskActions from './../../actions/task';
-import * as modalActions from './../../actions/modal';
+import * as modalActionCreators from './../../actions/modal';
 import styles from './styles';
 class TaskBoard extends Component {
   state = {
     open: false,
   };
-/*
+
   componentDidMount() {
     const { taskActionCreators } = this.props;
     const { fetchListTask } = taskActionCreators;
     fetchListTask();
   }
-*/
+
   handleClose = () => {
     this.setState({
       open: false,
@@ -31,17 +31,18 @@ class TaskBoard extends Component {
   };
 
   openForm = () => {
-    const { modalActions } = this.props;
-    const { showModal, changeModalTitle, changeModalContent } = modalActions;
+    const { modalActionCreators } = this.props;
+    const { showModal, changeModalTitle, changeModalContent } = modalActionCreators;
     showModal();
     changeModalTitle('Add new work');
+    changeModalContent(<TaskForm />);
   };
 
   renderBoard() {
     const { listTask } = this.props;
     let xhtml = null;
     xhtml = (
-      <Grid container spcacing={2}>
+      <Grid container spacing={2}>
         {STATUSES.map((status) => {
           const taskFiltered = listTask.filter(task => task.status === status.value);
           return <TaskList key={status.value} tasks={taskFiltered} status={status} />
@@ -106,7 +107,6 @@ class TaskBoard extends Component {
         </Button>
         {this.renderSearchBox()}
         {this.renderBoard()}
-        {this.renderForm()}
       </div>
     );
   }
@@ -118,7 +118,7 @@ TaskBoard.propTypes = {
     fetchListTask: PropTypes.func,
     filterTask: PropTypes.func,
   }),
-  modalActions: PropTypes.shape({
+  modalActionCreators: PropTypes.shape({
     showModal: PropTypes.func,
     hideModal: PropTypes.func,
     changeModalTitle: PropTypes.func,
@@ -135,7 +135,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     taskActionCreators: bindActionCreators(taskActions, dispatch),
-    modalActions: bindActionCreators(modalActions, dispatch),
+    modalActionCreators: bindActionCreators(modalActionCreators, dispatch),
   };
 };
 
